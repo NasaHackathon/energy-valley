@@ -14,8 +14,9 @@ app.use(cors());
 app.use(express.static(__dirname + '/../public/dist'));
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/getKeywordData')
-// app.get('/facebook', sm.FBtoAuth);
+// const testFn = () => console.log('this is good');
+
+app.get('/getKeywordData', testFn);
 
 app.listen(port, function() {
   console.log(`Listening on ${port}`);
