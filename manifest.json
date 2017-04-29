@@ -3,6 +3,9 @@
   "description": "Chrome extension that queries for the definition of a highlighted word.",
   "version": "0.0.0.1",
   "manifest_version": 2,
+  "background": {
+    "scripts": ["./public/main.js"]
+  },
   "icons": {
     "128": "icon_128.png"
   },
