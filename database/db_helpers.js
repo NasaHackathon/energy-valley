@@ -78,7 +78,8 @@ module.exports.saveSubmission = (submission, email, searchTerm, submissionType) 
   .catch(err => console.log('DB: error from saving definition submission', err));
 };
 
-this.saveUser(user1);
+// TOREMOVE: For dummy data testing only
+// this.saveUser(user1);
 // this.saveSearchResult(searchResult1);
 // this.saveSubmission(definitionSubmission1, user1.email, 'earth', 'definition');
 // this.saveSubmission({}, user1.email, 'sun', 'searchTerm');

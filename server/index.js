@@ -30,7 +30,7 @@ app.route('/api/user/post')
 // TOFIX: This has to take in the query from PUT request
 search('sun').then(result => this.handleSearchResult(result));
 search('earth').then(result => this.handleSearchResult(result));
-  
+
 // >>> TOFIX: These functions will be moved to requestHandler.js after Jason has done a PR
 module.exports.verifyUserLogin = (req, res, next) => {
   const email = req.body.email;
