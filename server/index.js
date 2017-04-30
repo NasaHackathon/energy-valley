@@ -21,6 +21,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.route('/api/user/post/')
   .post(rh.postDefinition);
+  
+app.post('/api/user/words', rh.getCacheData);
 
 app.get('/search', rh.searchQueryResults);
 

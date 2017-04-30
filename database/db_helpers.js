@@ -10,6 +10,10 @@ const { user1,
         definitionSubmission1,
         searchTermSubmission1 } = require('./sampleData.js');
 
+module.exports.getSearchTermData = (words) => {
+  return SearchResults.find({ words: { $in: ["text", "here"] }});
+}
+
 module.exports.checkUserCredentials = (email, password) => {
   return User.findOneAsync({ email, password })
   .then(success => {
