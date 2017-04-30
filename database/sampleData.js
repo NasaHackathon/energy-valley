@@ -1,14 +1,18 @@
 module.exports = {
   user1: {
-    email: 'user1@gmail.com',
-    password: 'user1',
+    email: 'Armstrong@gmail.com',
+    password: 'gmail',
   },
-  searchResult1: {
-    search_term: 'earth',
-    definition: 'Earth is round and big.',
-    image_url: 'http://solarviews.com/thumb/earth/bluemarblewest.jpg',
+  user2: {
+    email: 'Obama@gmail.com',
+    password: 'gmail',
   },
-  definitionSubmission1: {
-    submission_content: 'Earth is my home.',
+  user3: {
+    email: 'DeGeneres@gmail.com',
+    password: 'gmail',
   },
+  user4: {
+    email: 'Beyonce@gmail.com',
+    password: 'gmail',
+  }
 }

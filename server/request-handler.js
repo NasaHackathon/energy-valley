@@ -8,13 +8,18 @@ const user = require('../database/models/users.js');
 const dbh = require('../database/db_helpers');
 const search = require('../search/index.js');
 
-module.exports.postDefinition = function(req, res) {
-  let email = req.body.email;
-  let password = req.body.password;
-  let term = req.body.term;
-  let defintion = req.body.definition;
-  let searchTerm = req.body.searchTerm;
-  res.json('done');
+module.exports.storeNewDefinition = function(req, res) {
+  const email = req.query.email;
+  const search_term = req.query.search_term;
+  const definition = req.query.definition;
+  return dbh.saveSubmission({}, email, search_term, 'definition')
+  .then(success => {
+    res.status(200).send(success);
+  })
+  .catch(err => {
+    console.log('RH: Error storing new definition', err);
+    res.status(500);
+  })
 }
 
 module.exports.getCacheData = function(req, res) {
@@ -30,13 +35,8 @@ module.exports.getCacheData = function(req, res) {
   */
   console.log('req body', req.body);
   const body = req.body.body
-
-
-
   const bodySplit = body.trim().toLowerCase().replace( /\W/g, ' ').split(' ');
   // console.log('bopdySplit', bodySplit);
-
-
   var mySet = new Set();
 
   bodySplit.forEach((element) => {
@@ -47,10 +47,6 @@ module.exports.getCacheData = function(req, res) {
   dbh.getSearchTermData(mySet)
   .then(data => {
     console.log('************' , data);
-    
-
-
-
     res.json(data);
   }); 
 }

@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-const getUserData = () => {
-  return axios.post('/getUserData');
+const submitNewDefinition = (email, search_term, definition) => {
+  return axios.post('/postDefinition', {
+    params: { email, search_term, definition }
+  });
 }
 
-export { getKeywordData };
+export { submitNewDefinition };

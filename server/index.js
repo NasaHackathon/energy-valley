@@ -14,22 +14,23 @@ const search = require('../search/');
 
 const port = process.env.PORT || 1337;
 
-
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(cors());
 app.use(express.static(__dirname + '/../public/dist'));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit:50000}));
 
+app.post('/api/user/words', rh.getCacheData);
+
 app.route('/api/user/post/')
   .post(rh.postDefinition);
-  
-app.post('/api/user/words', rh.getCacheData);
 
 app.get('/search', rh.searchQueryResults);
 
 // voteType can be either upvote or downvote
 app.route('/api/:voteType')
    .put(dbh.updateVote);
+
+app.post('/postDefinition', rh.storeNewDefinition);
 
 // TOFIX: This has to take in the query from PUT request
 // TOFIX: This has totake in the query from PUT request
@@ -45,10 +46,8 @@ search('uranus').then(result => rh.handleSearchResult(result));
 search('pluto').then(result => rh.handleSearchResult(result));
 search('Nebula').then(result => rh.handleSearchResult(result));
 
-
 app.listen(port, function() {
   console.log(`Listening on ${port}`);
 });
 
 module.exports = app;
-

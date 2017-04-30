@@ -5,10 +5,7 @@ const SearchResults = require('./models/searchResults.js');
 const UserSubmissions = require('./models/userSubmissions.js');
 Promise.promisifyAll(mongoose);
 
-const { user1,
-        searchResult1,
-        definitionSubmission1,
-        searchTermSubmission1 } = require('./sampleData.js');
+const { user1, user2, user3, user4 } = require('./sampleData.js');
 
 module.exports.getSearchTermData = (words) => {
   return SearchResults.findAsync({})
@@ -109,6 +106,9 @@ module.exports.updateVote = (req, res) => {
 };
 // TOREMOVE: For dummy data testing only
 this.saveUser(user1);
+this.saveUser(user2);
+this.saveUser(user3);
+this.saveUser(user4);
 // this.saveSearchResult(searchResult1);
 // this.saveSubmission(definitionSubmission1, user1.email, 'earth', 'definition');
 // this.saveSubmission({}, user1.email, 'sun', 'searchTerm');
