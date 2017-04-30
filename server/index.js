@@ -27,6 +27,10 @@ app.post('/api/user/words', rh.getCacheData);
 
 app.get('/search', rh.searchQueryResults);
 
+// voteType can be either upvote or downvote
+app.route('/api/:voteType')
+   .put(dbh.updateVote);
+
 // TOFIX: This has to take in the query from PUT request
 search('sun').then(result => rh.handleSearchResult(result));
 search('earth').then(result => rh.handleSearchResult(result));

@@ -98,6 +98,15 @@ module.exports.saveSubmission = (submission, email, searchTerm, submissionType) 
   .catch(err => console.log('DB: error from saving definition submission', err));
 };
 
+module.exports.updateVote = (req, res) => {
+  const term = req.query.term;
+  if (req.params.voteType === 'upvote') {
+    SearchResults.findOneAndUpdate({ search_term: term }, { $inc: { upvotes: 1 } });
+  } else if (req.params.voteType === 'downvote') {
+    SearchResults.findOneAndUpdate({ search_term: term }, { $inc: { upvotes: -1 } })
+  }
+  res.end();
+};
 // TOREMOVE: For dummy data testing only
 this.saveUser(user1);
 // this.saveSearchResult(searchResult1);
