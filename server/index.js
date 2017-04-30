@@ -19,10 +19,7 @@ app.use(cors());
 app.use(express.static(__dirname + '/../public/dist'));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit:50000}));
 
-app.post('/api/user/words', rh.getCacheData);
-
-app.route('/api/user/post/')
-  .post(rh.postDefinition);
+app.post('/api/user/words', rh.getCacheData);\
 
 app.get('/search', rh.searchQueryResults);
 
