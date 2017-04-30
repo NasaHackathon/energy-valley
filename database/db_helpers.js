@@ -10,6 +10,16 @@ const { user1,
         definitionSubmission1,
         searchTermSubmission1 } = require('./sampleData.js');
 
+module.exports.checkUserCredentials = (email, password) => {
+  return User.findOneAsync({ email, password })
+  .then(success => {
+    return 'Successfully logged in.';
+  })
+  .catch(err => {
+    console.log('DB: Error in checking user login', err);
+  })
+}
+
 module.exports.getUserId = (email) => {
   return User.findOneAsync({ email })
   .then(userProfile => {
@@ -54,7 +64,6 @@ module.exports.saveSubmission = (submission, email, searchTerm, submissionType) 
   // TODO: Pass down a search_term
   // TOFIX: Same person can submit same searchTerm with same definition many times
   const idsStorage = [];
-  console.log('what is this email??');
   idsStorage.push(this.getUserId(email));
   idsStorage.push(this.getSearchTermId(searchTerm));
 
@@ -70,6 +79,6 @@ module.exports.saveSubmission = (submission, email, searchTerm, submissionType) 
 };
 
 this.saveUser(user1);
-this.saveSearchResult(searchResult1);
-this.saveSubmission(definitionSubmission1, user1.email, 'earth', 'definition');
-this.saveSubmission({}, user1.email, 'sun', 'searchTerm');
+// this.saveSearchResult(searchResult1);
+// this.saveSubmission(definitionSubmission1, user1.email, 'earth', 'definition');
+// this.saveSubmission({}, user1.email, 'sun', 'searchTerm');

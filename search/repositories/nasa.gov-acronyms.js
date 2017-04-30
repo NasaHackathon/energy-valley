@@ -4,11 +4,11 @@ const request = require('request-promise');
 
 function search_matchs(query) {
   return (object) => {
-    return object.title.toUpperCase().includes(query.toUpperCase());
+    return object.title.toUpperCase() === query.toUpperCase();
   }
 }
 
-module.exports = function (q) {
+module.exports = (searchTerm) => {
   return request({
       uri: `https://www.nasa.gov/api/1/record/node/366819.json`,
       json: true
@@ -28,5 +28,5 @@ module.exports = function (q) {
 
       return out;
     })
-    .filter(search_matchs(q));
+    .filter(search_matchs(searchTerm));
 }

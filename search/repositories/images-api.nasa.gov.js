@@ -1,9 +1,9 @@
 const _ = require('lodash');
 const request = require('request-promise');
 
-module.exports = function (q) {
+module.exports = (searchTerm) => {
   return request({
-    uri: `https://images-api.nasa.gov/search?q=${q}&page=1&media_type=image&year_start=1920&year_end=2017`,
+    uri: `https://images-api.nasa.gov/search?q=${searchTerm}&page=1&media_type=image&year_start=1920&year_end=2017`,
     json: true
   })
   .then(body => {
