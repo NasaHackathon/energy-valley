@@ -33,7 +33,7 @@ module.exports.getCacheData = function(req, res) {
 
 
 
-  const bodySplit = body.trim().replace( /\W/g, ' ').split(' ');
+  const bodySplit = body.trim().toLowerCase().replace( /\W/g, ' ').split(' ');
   // console.log('bopdySplit', bodySplit);
 
 
