@@ -18,7 +18,7 @@ const port = process.env.PORT || 1337;
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(cors());
 app.use(express.static(__dirname + '/../public/dist'));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit:50000}));
 
 app.route('/api/user/post/')
   .post(rh.postDefinition);
