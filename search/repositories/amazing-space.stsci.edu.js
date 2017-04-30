@@ -1,13 +1,13 @@
 const cheerio = require('cheerio');
 const request = require('request-promise');
 
-function search_matchs(query) {
+const search_matchs = (query) => {
   return (object) => {
     return object.title.toUpperCase().includes(query.toUpperCase());
   }
 }
 
-module.exports = function (q) {
+module.exports = (query) => {
   return request(`https://amazing-space.stsci.edu/glossary`)
     .then(body => {
       const $ = cheerio.load(body);
@@ -24,5 +24,5 @@ module.exports = function (q) {
 
       return out;
     })
-    .filter(search_matchs(q));
+    .filter(search_matchs(query));
 }
