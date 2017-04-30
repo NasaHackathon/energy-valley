@@ -27,6 +27,8 @@ app.get('/getKeywordData', testFn);
 app.route('/api/user/post')
   .post(rh.postDefinition);
 
+app.get('/search', rh.search);
+
 // TOFIX: This has to take in the query from PUT request
 search('sun').then(result => rh.handleSearchResult(result));
 search('earth').then(result => rh.handleSearchResult(result));

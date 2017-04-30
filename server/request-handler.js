@@ -3,6 +3,7 @@
 const userSub = require('../database/models/userSubmissions.js');
 const user = require('../database/models/users.js');
 const dbh = require('../database/db_helpers');
+const search = require('../search/index.js');
 
 exports.postDefinition = function(req, res) {
   let email = req.body.email;
@@ -31,3 +32,13 @@ module.exports.handleSearchResult = (webData) => {
   .catch(err => console.log('RH: Error handling search result', err));
 }
 // <<<
+
+module.exports.search = (req, res) => {
+  search(req.query.q)
+  .then((queryResults) => {
+    res.status(200).send(queryResults);
+  })
+  .catch(() => {
+    res.statusCode(500);
+  });
+};
