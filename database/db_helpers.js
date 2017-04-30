@@ -15,7 +15,7 @@ module.exports.getSearchTermData = (words) => {
   .then(data => {
     var result = [];
     data.forEach((element) => {
-      if(words.has(element)) {
+      if(words.has(element.search_term)) {
         result.push(element);
       }
     });

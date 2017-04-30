@@ -18,18 +18,32 @@ module.exports.postDefinition = function(req, res) {
 }
 
 module.exports.getCacheData = function(req, res) {
-  // const body = req.body.body
-  // const bodySplit = body.split(' ');
+  /*
+  var stuff = '';
+  req.on('data', (chunk) => {
+    console.log('chunk', chunk);
+    stuff += chunk;
+  });
+  req.on('end', function() {
+    console.log('body', stuff);
+  })
+  */
+  console.log('req body', req.body);
+  const body = req.body.body
+
+
+
+  const bodySplit = body.trim().replace( /\W/g, ' ').split(' ');
+  console.log('bopdySplit', bodySplit);
+
+
   var mySet = new Set();
 
-  // bodySplit.forEach((element) => {
-  //   mySet.add(element);
-  // });
+  bodySplit.forEach((element) => {
+    mySet.add(element);
+  });
 
-
-  // mySet = ['Earth', 'Sun'];
-  mySet.add('earth');
-  mySet.add('sun');
+  console.log('myset', mySet);
   dbh.getSearchTermData(mySet)
   .then(data => {
     console.log(data);
