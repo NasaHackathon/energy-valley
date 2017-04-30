@@ -76,10 +76,12 @@ module.exports.saveSearchResult = (webData) => {
   .catch(err => console.log('Error in saving search result', err));
 };
 
-module.exports.saveSubmission = (submission, email, searchTerm, submissionType) => {
+module.exports.saveSubmission = (submission) => {
   // TODO: Pass down email address from req.body
   // TODO: Pass down a search_term
   // TOFIX: Same person can submit same searchTerm with same definition many times
+  const email = submission.email;
+  const searchTerm = submission.search_term;
   const idsStorage = [];
   idsStorage.push(this.getUserId(email));
   idsStorage.push(this.getSearchTermId(searchTerm));
@@ -89,7 +91,7 @@ module.exports.saveSubmission = (submission, email, searchTerm, submissionType) 
     // TOFIX: Author_ID is empty inside user_submission table at init.
     submission.author_id = resultIds[0];
     submission.search_term_id = resultIds[1];
-    submission.submission_type = submissionType;
+    submission.submission_content = submission.definition;
     return UserSubmissions(submission).saveAsync();
   })
   .catch(err => console.log('DB: error from saving definition submission', err));
@@ -105,10 +107,10 @@ module.exports.updateVote = (req, res) => {
   res.end();
 };
 // TOREMOVE: For dummy data testing only
-this.saveUser(user1);
-this.saveUser(user2);
-this.saveUser(user3);
-this.saveUser(user4);
+module.exports.saveUser(user1);
+module.exports.saveUser(user2);
+module.exports.saveUser(user3);
+module.exports.saveUser(user4);
 // this.saveSearchResult(searchResult1);
 // this.saveSubmission(definitionSubmission1, user1.email, 'earth', 'definition');
 // this.saveSubmission({}, user1.email, 'sun', 'searchTerm');

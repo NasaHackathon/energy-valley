@@ -9,10 +9,10 @@ const dbh = require('../database/db_helpers');
 const search = require('../search/index.js');
 
 module.exports.storeNewDefinition = function(req, res) {
-  const email = req.query.email;
-  const search_term = req.query.search_term;
-  const definition = req.query.definition;
-  return dbh.saveSubmission({}, email, search_term, 'definition')
+  const email = req.body.email;
+  const search_term = req.body.search_term;
+  const definition = req.body.definition;
+  return dbh.saveSubmission({ email, search_term, definition, submission_type: 'definition' })
   .then(success => {
     res.status(200).send(success);
   })
