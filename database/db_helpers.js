@@ -1,7 +1,75 @@
+const mongoose = require('mongoose');
+const Promise = require('bluebird');
 const User = require('./models/users.js');
 const SearchResults = require('./models/searchResults.js');
 const UserSubmissions = require('./models/userSubmissions.js');
-const mongoose = require('mongoose');
-
-const Promise = require('bluebird');
 Promise.promisifyAll(mongoose);
+
+const { user1,
+        searchResult1,
+        definitionSubmission1,
+        searchTermSubmission1 } = require('./sampleData.js');
+
+module.exports.getUserId = (email) => {
+  return User.findOneAsync({ email })
+  .then(userProfile => {
+    if (!userProfile) {
+      return undefined;
+    }
+    return userProfile._id;
+  })
+};
+
+module.exports.getSearchTermId = (search_term) => {
+  return SearchResults.findOneAsync({ search_term })
+  .then(searchResult => {
+    if (!searchResult) {
+      return SearchResults({ search_term }).saveAsync();
+    }
+    return searchResult._id;
+  })
+}
+
+module.exports.saveUser = (userCredentials) => {
+  return this.getUserId(userCredentials.email)
+  .then(userId => {
+    if (!userId) {
+      return User(userCredentials).saveAsync();
+    }
+  })
+};
+
+module.exports.saveSearchResult = (webData) => {
+  return SearchResults.findOneAsync({ search_term: webData.search_term })
+  .then(searchResult => {
+    if (!searchResult) {
+      return SearchResults(webData).saveAsync();
+    }
+  })
+  .catch(err => console.log('Error in saving search result', err));
+};
+
+module.exports.saveSubmission = (submission, email, searchTerm, submissionType) => {
+  // TODO: Pass down email address from req.body
+  // TODO: Pass down a search_term
+  // TOFIX: Same person can submit same searchTerm with same definition many times
+  const idsStorage = [];
+  console.log('what is this email??');
+  idsStorage.push(this.getUserId(email));
+  idsStorage.push(this.getSearchTermId(searchTerm));
+
+  return Promise.all(idsStorage)
+  .then(resultIds => {
+    // TOFIX: Author_ID is empty inside user_submission table at init.
+    submission.author_id = resultIds[0];
+    submission.search_term_id = resultIds[1];
+    submission.submission_type = submissionType;
+    return UserSubmissions(submission).saveAsync();
+  })
+  .catch(err => console.log('DB: error from saving definition submission', err));
+};
+
+this.saveUser(user1);
+this.saveSearchResult(searchResult1);
+this.saveSubmission(definitionSubmission1, user1.email, 'earth', 'definition');
+this.saveSubmission({}, user1.email, 'sun', 'searchTerm');
