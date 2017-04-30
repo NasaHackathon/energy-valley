@@ -39,6 +39,6 @@ module.exports.search = (req, res) => {
     res.status(200).send(queryResults);
   })
   .catch(() => {
-    res.statusCode(500);
+    res.status(500);
   });
 };
