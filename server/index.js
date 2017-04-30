@@ -5,8 +5,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-const db = require('../database/db_config.js');
 const path = require('path');
+const db = require('../database/db_config.js');
+const requestHandler = require('./request-handler.js');
 const Promise = require('bluebird');
 
 const port = process.env.PORT || 1337;
@@ -20,6 +21,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 const testFn = () => console.log('this is good');
 
 app.get('/getKeywordData', testFn);
+app.route('/api/user/post')
+  .post(requestHandler.postDefinition);
 
 app.listen(port, function() {
   console.log(`Listening on ${port}`);
