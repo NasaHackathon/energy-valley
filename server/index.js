@@ -32,8 +32,19 @@ app.route('/api/:voteType')
    .put(dbh.updateVote);
 
 // TOFIX: This has to take in the query from PUT request
+// TOFIX: This has totake in the query from PUT request
 search('sun').then(result => rh.handleSearchResult(result));
 search('earth').then(result => rh.handleSearchResult(result));
+search('moon').then(result => rh.handleSearchResult(result));
+search('venus').then(result => rh.handleSearchResult(result));
+search('mars').then(result => rh.handleSearchResult(result));
+search('jupiter').then(result => rh.handleSearchResult(result));
+search('saturn').then(result => rh.handleSearchResult(result));
+search('neptune').then(result => rh.handleSearchResult(result));
+search('uranus').then(result => rh.handleSearchResult(result));
+search('pluto').then(result => rh.handleSearchResult(result));
+search('Nebula').then(result => rh.handleSearchResult(result));
+
 
 app.listen(port, function() {
   console.log(`Listening on ${port}`);
