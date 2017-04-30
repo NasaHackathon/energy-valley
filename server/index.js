@@ -14,13 +14,16 @@ const search = require('../search/');
 
 const port = process.env.PORT || 1337;
 
-app.use(bodyParser.json());
+
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(cors());
 app.use(express.static(__dirname + '/../public/dist'));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.route('/api/user/post/')
   .post(rh.postDefinition);
+  
+app.post('/api/user/words', rh.getCacheData);
 
 app.get('/search', rh.searchQueryResults);
 
