@@ -11,7 +11,23 @@ const { user1,
         searchTermSubmission1 } = require('./sampleData.js');
 
 module.exports.getSearchTermData = (words) => {
-  return SearchResults.find({ words: { $in: ["text", "here"] }});
+  return SearchResults.findAsync({})
+  .then(data => {
+    var result = [];
+    data.forEach((element) => {
+      if(words.has(element)) {
+        result.push(element);
+      }
+    });
+    return result;
+  })
+  .then(result => {
+    console.log('result', result);
+    return result;
+  }).catch(error => {
+    console.log(error);
+    return error;
+  })
 }
 
 module.exports.checkUserCredentials = (email, password) => {

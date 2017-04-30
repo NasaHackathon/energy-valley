@@ -18,33 +18,23 @@ module.exports.postDefinition = function(req, res) {
 }
 
 module.exports.getCacheData = function(req, res) {
-  const body = req.body.body
-  const bodySplit = body.split(' ');
+  // const body = req.body.body
+  // const bodySplit = body.split(' ');
   var mySet = new Set();
 
-  bodySplit.forEach((element) => {
-    mySet.add(element);
-  });
+  // bodySplit.forEach((element) => {
+  //   mySet.add(element);
+  // });
 
+
+  // mySet = ['Earth', 'Sun'];
+  mySet.add('earth');
+  mySet.add('sun');
   dbh.getSearchTermData(mySet)
-  .then()
-
-  var words = ['moon', 'earth', 'sun'];
-
-
-
-
-
-  //Reduce
-  // const words = bodySplit.reduce((acc, cur) => {
-  //   if (acc[cur] === undefined) {
-  //     acc[cur] = 1;
-  //   } else {
-  //     acc[cur]++;
-  //   }
-  //   return acc;
-  // }, {});
-  const wordsArray = 
+  .then(data => {
+    console.log(data);
+    res.json(data);
+  }); 
 }
 
 module.exports.verifyUserLogin = (req, res) => {
