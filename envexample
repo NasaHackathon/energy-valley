@@ -3,4 +3,5 @@
 #Make a copy of this file and rename it to config.env, then replace any necessary values below.
 #If needed, add variables below in this format MY_KEY=f6j35hk32jl543n23b453k
 
-MONGODB_URI=mongodb://[username]:[password]
+
+MONGODB_URI=mongodb://heroku_kglp85l8:9la27c0kbd2it2rmiff0tdspul@ds127341.mlab.com:27341/heroku_kglp85l8

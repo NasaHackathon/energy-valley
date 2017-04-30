@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+console.log('env', process.env);
+console.log('process ', process.env.MONGODB_URI);
 const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/nasa';
 
 mongoose.connect(dbUrl);
