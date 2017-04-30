@@ -24,7 +24,7 @@ const testFn = () => console.log('this is good');
 app.get('/getKeywordData', testFn);
 // <<<
 
-app.route('/api/user/post')
+app.route('/api/user/post/')
   .post(rh.postDefinition);
 
 app.get('/search', rh.search);
