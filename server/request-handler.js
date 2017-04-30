@@ -34,7 +34,7 @@ module.exports.getCacheData = function(req, res) {
 
 
   const bodySplit = body.trim().replace( /\W/g, ' ').split(' ');
-  console.log('bopdySplit', bodySplit);
+  // console.log('bopdySplit', bodySplit);
 
 
   var mySet = new Set();
@@ -46,7 +46,11 @@ module.exports.getCacheData = function(req, res) {
   console.log('myset', mySet);
   dbh.getSearchTermData(mySet)
   .then(data => {
-    console.log(data);
+    console.log('************' , data);
+    
+
+
+
     res.json(data);
   }); 
 }
