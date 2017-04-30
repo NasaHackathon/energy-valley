@@ -1,9 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
 const app = express();
-
+const db = require('../database/db_config.js');
 const path = require('path');
 const Promise = require('bluebird');
 
@@ -14,7 +13,8 @@ app.use(cors());
 app.use(express.static(__dirname + '/../public/dist'));
 app.use(bodyParser.urlencoded({extended: true}));
 
-// const testFn = () => console.log('this is good');
+// Remove below testFn when we have incoming GET request from client
+const testFn = () => console.log('this is good');
 
 app.get('/getKeywordData', testFn);
 
