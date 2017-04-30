@@ -14,7 +14,6 @@ exports.postDefinition = function(req, res) {
   res.json('done');
 }
 
-// >>> TOFIX: These functions will be moved to requestHandler.js after Jason has done a PR
 module.exports.verifyUserLogin = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -31,7 +30,6 @@ module.exports.handleSearchResult = (webData) => {
   return dbh.saveSearchResult(webData)
   .catch(err => console.log('RH: Error handling search result', err));
 }
-// <<<
 
 module.exports.searchQueryResults = (req, res) => {
   search(req.query.q)
